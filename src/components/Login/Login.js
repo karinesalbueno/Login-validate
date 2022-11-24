@@ -6,7 +6,7 @@ import Button from '../UI/Button/Button'
 
 const EmailReducer = (state, action) => {
   if (action.type === 'USER_INPUT') {
-    return { value: action.val, isValid: action.valid.includes('@') }
+    return { value: action.val, isValid: action.val.includes('@') }
   }
 
   if (action.type === 'INPUT_BLUR') {
