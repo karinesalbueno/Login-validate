@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react'
+import React, { useState, useReducer, useEffect } from 'react'
 
 import Card from '../UI/Card/Card'
 import classes from './Login.module.css'
@@ -21,7 +21,7 @@ const PasswordReducer = (state, action) => {
   }
 
   if (action.type === 'INPUT_BLUR') {
-    return { value: state.value, isValid: state.value.includes('@') }
+    return { value: state.value, isValid: state.value.trim().length > 6 }
   }
   return { value: '', isValid: false }
 }
@@ -36,20 +36,25 @@ const Login = (props) => {
     value: '',
     isValid: null,
   })
-  const [passWordState, dispatchPassword] = useReducer(PasswordReducer, {
+  const [passwordState, dispatchPassword] = useReducer(PasswordReducer, {
     value: '',
     isValid: null,
   })
 
+  const { isValid: emailIsValid } = emailState
+  const { isValid: passwordIsValid } = passwordState
+
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: 'USER_INPUT', val: event.target.value })
-    setFormIsValid(emailState.value && passWordState.value)
   }
 
   const passwordChangeHandler = (event) => {
     dispatchPassword({ type: 'USER_INPUT', val: event.target.value })
-    setFormIsValid(event.target.value.trim().length > 6 && emailState.isValid)
   }
+
+  useEffect(() => {
+    setFormIsValid(emailIsValid && passwordIsValid)
+  }, [emailIsValid, passwordIsValid])
 
   const validateEmailHandler = () => {
     dispatchEmail({ type: 'INPUT_BLUR' })
@@ -61,7 +66,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault()
-    props.onLogin(emailState.value, passWordState.value)
+    props.onLogin(emailState.value, passwordState.value)
   }
 
   return (
@@ -83,14 +88,14 @@ const Login = (props) => {
         </div>
         <div
           className={`${classes.control} ${
-            passWordState.isValid === false ? classes.invalid : ''
+            passwordState.isValid === false ? classes.invalid : ''
           }`}
         >
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
-            value={passWordState.value}
+            value={passwordState.value}
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
           />
