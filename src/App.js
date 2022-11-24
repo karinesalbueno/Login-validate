@@ -21,6 +21,7 @@ function App() {
   };
 
   const logoutHandler = () => {
+    localStorage.setItem('isSubmitLogin', '');
     setIsLoggedIn(false);
   };
 
