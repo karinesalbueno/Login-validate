@@ -43,8 +43,8 @@ const Login = () => {
     isValid: null,
   })
 
-  const { isValid: emailIsValid } = emailState
-  const { isValid: passwordIsValid } = passwordState
+  const emailIsValid = emailState
+  const passwordIsValid = passwordState
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: 'USER_INPUT', val: event.target.value })
@@ -73,29 +73,32 @@ const Login = () => {
     context.onLogin(emailState.value, passwordState.value)
   }
 
+  const IputEmail = {
+    id: 'email',
+    label: 'E-mail',
+    type: 'email',
+    isvalid: emailIsValid,
+    value: emailState.value,
+    onChange: emailChangeHandler,
+    onBlur: validateEmailHandler,
+  }
+  const IputPassword = {
+    id: 'password',
+    label: 'Password',
+    type: 'password',
+    isvalid: passwordState,
+    value: passwordState.value,
+    onChange: passwordChangeHandler,
+    onBlur: validatePasswordHandler,
+  }
+
   return (
-    <Card className={classes.login}>
+    <Card classname={classes.login}>
       <form onSubmit={submitHandler}>
-        <Input
-          id="email"
-          label="E-mail"
-          type="email"
-          isValid={emailIsValid}
-          value={emailState.value}
-          onChange={emailChangeHandler}
-          onBlur={validateEmailHandler}
-        />
-        <Input
-          id="password"
-          label="Password"
-          type="password"
-          isValid={passwordState}
-          value={passwordState.value}
-          onChange={passwordChangeHandler}
-          onBlur={validatePasswordHandler}
-        />
+        <Input input={{ ...IputEmail }} />
+        <Input input={{ ...IputPassword }} />
         <div className={classes.actions}>
-          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
+          <Button type="submit" classname={classes.btn} disabled={!formIsValid}>
             Login
           </Button>
         </div>
