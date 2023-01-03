@@ -22,13 +22,13 @@ function App() {
   };
 
   const logoutHandler = () => {
-    localStorage.setItem('isSubmitLogin', '');
+    localStorage.removeItem('isSubmitLogin');
     setIsLoggedIn(false);
   };
 
   return (
     <React.Fragment>
-      <AuthContext.Provider value={{isLoggedIn: isLoggedIn}}>
+      <AuthContext.Provider value={{isLoggedIn: isLoggedIn, onLogout: logoutHandler}}>
       <MainHeader onLogout={logoutHandler} />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
