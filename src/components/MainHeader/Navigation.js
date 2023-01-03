@@ -3,7 +3,7 @@ import AuthContext from '../../services/AuthContext'
 import HeaderCartButton from '../UI/Layout/HeaderCartButton'
 import classes from './Navigation.module.css'
 
-const Navigation = () => {
+const Navigation = (props) => {
   const context = useContext(AuthContext)
 
   return (
@@ -20,7 +20,7 @@ const Navigation = () => {
           </li>
         )}
         {context.isLoggedIn && (
-          <li>
+          <li onClick={props.onShowModal}>
             <HeaderCartButton />
           </li>
         )}
