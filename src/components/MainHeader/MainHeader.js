@@ -8,10 +8,13 @@ const MainHeader = () => {
   const context = useContext(AuthContext)
 
   return (
-    <header className={classes['main-header']}>
-      <h1>cosmetics</h1>
-      <Navigation onLogout={context.onLogout} />
-    </header>
+    <>
+      <header className={classes['main-header']}>
+        <h1>cosmetics</h1>
+        <Navigation onLogout={context.onLogout} />
+      </header>
+      <img src={'/make2.jpg'} alt={'modelo'} />
+    </>
   )
 }
 
