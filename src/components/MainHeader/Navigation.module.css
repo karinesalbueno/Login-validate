@@ -8,12 +8,13 @@
 
 .nav li {
   margin: 0;
-  margin-left: 2rem;
+  margin: 0 1rem;
 }
 
 .nav a {
   text-decoration: none;
-  color: white;
+  color: #202020;
+  font-size: 1.2rem;
 }
 
 .nav a:hover,
