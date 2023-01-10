@@ -4,24 +4,21 @@ import classes from './ProductItemForm.module.css'
 
 const ProductItemForm = (props) => {
   const [amountIsValid, setAmountIsValid] = useState(true)
-
   const amountInputRef = useRef()
 
   const submitHandler = (event) => {
     event.preventDefault()
 
-    //este valor sempre será uma string
     const enteredAmount = amountInputRef.current.value
-    //convertendo em number
     const enteredAmountNumber = +enteredAmount
 
-    //removendo espaço em branco e verificar se está vazio
     if (
       enteredAmount.trim().length === 0 ||
       enteredAmountNumber < 1 ||
       enteredAmountNumber > 5
     ) {
       setAmountIsValid(false)
+      return
     }
 
     props.onAddToCart(enteredAmountNumber)
@@ -31,7 +28,7 @@ const ProductItemForm = (props) => {
     <form className={classes.form} onSubmit={submitHandler}>
       <Input
         ref={amountInputRef}
-        label={'qntd' + props.id}
+        label="Amount"
         input={{
           id: 'amount_' + props.id,
           type: 'number',
@@ -41,8 +38,8 @@ const ProductItemForm = (props) => {
           defaultValue: '1',
         }}
       />
-      <button>+ adicionar</button>
-      {!amountIsValid && <p>Por favor entre com uma quantidade entre (1-5)</p>}
+      <button>+ Add</button>
+      {!amountIsValid && <p>Please enter a valid amount (1-5).</p>}
     </form>
   )
 }

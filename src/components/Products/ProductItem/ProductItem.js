@@ -5,13 +5,13 @@ import classes from './ProductItem.module.css'
 import CartContext from '../../../store/cart-context'
 
 const ProductItem = (props) => {
-  const cartContext = useContext(CartContext)
+  const cartCtx = useContext(CartContext)
 
   // 2 casas decimais
-  const price = `$${props.product.price.toFixed(2)}`
+  const price = `$${props.price.toFixed(2)}`
 
   const addToCartHandler = (amount) => {
-    cartContext.addItem({
+    cartCtx.addItem({
       id: props.id,
       name: props.name,
       amount: amount,
@@ -22,11 +22,10 @@ const ProductItem = (props) => {
   return (
     <li className={classes.product}>
       <div>
-        <h3>{props.product.name}</h3>
-        <div className={classes.description}>{props.product.description}</div>
+        <h3>{props.name}</h3>
+        <div className={classes.description}>{props.description}</div>
         <div className={classes.price}>{price}</div>
       </div>
-
       <div>
         <ProductItemForm id={props.id} onAddToCart={addToCartHandler} />
       </div>

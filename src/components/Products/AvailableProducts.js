@@ -33,10 +33,12 @@ const DUMMY_AvailableProducts = [
 const AvailableProducts = () => {
   const productsList = DUMMY_AvailableProducts.map((prod) => (
     <ProductItem
-      key={prod.id}
-      //escreva product depois de props no elemento filho
-      //desta maneira, ñ é necessário passar parâmetro um por um
       product={prod}
+      key={prod.id}
+      id={prod.id}
+      name={prod.name}
+      description={prod.description}
+      price={prod.price}
     />
   ));
 

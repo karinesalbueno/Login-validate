@@ -4,17 +4,16 @@ import CartContext from './cart-context'
 
 const defaultCartState = {
   items: [],
-  totalAmount: 0,
-}
+  totalAmount: 0
+};
 
 const cartReducer = (state, action) => {
   if (action.type === 'ADD_ITEM') {
     const updatedItems = state.items.concat(action.item)
-    const updatedTotalAmount =
-      state.totalAmount + action.item.price * action.item.amount
+    const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
     return {
       items: updatedItems,
-      totalAmount: updatedTotalAmount,
+      totalAmount: updatedTotalAmount
     }
   }
 
@@ -31,15 +30,15 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: 'ADD_ITEM', item: item })
   }
 
-  const removeItemToCartHandler = (id) => {
-    dispatchCartAction({ type: 'REMOVE_ITEM', item: id })
+  const removeItemFromCartHandler = (id) => {
+    dispatchCartAction({ type: 'REMOVE_ITEM', id: id })
   }
 
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
-    removeItem: removeItemToCartHandler,
+    removeItem: removeItemFromCartHandler,
   }
 
   return (
