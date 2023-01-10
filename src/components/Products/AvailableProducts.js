@@ -28,22 +28,22 @@ const DUMMY_AvailableProducts = [
     description: '4h de proteção',
     price: 18.99,
   },
-]
+];
 
 const AvailableProducts = () => {
-  const ProductsList = DUMMY_AvailableProducts.map((prod) => (
+  const productsList = DUMMY_AvailableProducts.map((prod) => (
     <ProductItem
       key={prod.id}
       //escreva product depois de props no elemento filho
       //desta maneira, ñ é necessário passar parâmetro um por um
       product={prod}
     />
-  ))
+  ));
 
   return (
     <section className={classes.products}>
       <Card>
-        <ul>{ProductsList}</ul>
+        <ul>{productsList}</ul>
       </Card>
     </section>
   )
