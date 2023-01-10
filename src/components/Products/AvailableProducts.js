@@ -33,7 +33,7 @@ const DUMMY_AvailableProducts = [
 const AvailableProducts = () => {
   const productsList = DUMMY_AvailableProducts.map((prod) => (
     <ProductItem
-      product={prod}
+      // product={prod}
       key={prod.id}
       id={prod.id}
       name={prod.name}
